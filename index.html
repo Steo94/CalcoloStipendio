@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stima Stipendio Netto - Il Tuo Tool Online</title>
+  <meta name="description" content="Calcola facilmente il tuo stipendio netto partendo dalla RAL o dal lordo mensile. Tool Calcola Stipendio aggiornato al 2025, semplice e veloce.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="particles-js"></div>
+
+  <header class="site-header">
+    <h1>Stima dello Stipendio</h1>
+  </header>
+
+  <main class="main-calculator-area">
+    <div class="container">
+      <div class="tabs">
+        <button class="tab-button active" onclick="mostraScheda('schedaCalcoloDaRal', this)">RAL &rarr; Netto</button>
+        <button class="tab-button" onclick="mostraScheda('schedaCalcoloDaMensileLordo', this)">Mensile Lordo &rarr; Netto</button>
+      </div>
+
+      <div id="schedaCalcoloDaRal" class="tab-content active">
+        <h2>Stima Netto da RAL</h2>
+        <label for="ral">Inserisci la RAL (€):</label>
+        <input type="number" id="ral" placeholder="Es. 30000">
+
+        <label for="regioneRal">Seleziona la tua regione:</label>
+        <select id="regioneRal">
+          </select>
+
+        <button onclick="calcolaNettoDaRal()">Calcola</button>
+        <div id="risultatoRal" class="risultato-sezione"></div>
+      </div>
+
+      <div id="schedaCalcoloDaMensileLordo" class="tab-content">
+        <h2>Stima Netto da Mensile Lordo</h2>
+        <label for="mensileLordo">Inserisci il Lordo Mensile (€):</label>
+        <input type="number" id="mensileLordo" placeholder="Es. 2000">
+
+        <label for="numeroMensilita">Numero Mensilità (per stima RAL):</label>
+        <select id="numeroMensilita">
+          <option value="13" selected>13</option>
+          <option value="14">14</option>
+        </select>
+
+        <label for="regioneMensileLordo">Seleziona la tua regione:</label>
+        <select id="regioneMensileLordo">
+          </select>
+
+        <button onclick="calcolaNettoDaMensileLordo()">Calcola</button>
+        <div id="risultatoMensileLordo" class="risultato-sezione"></div>
+      </div>
+
+      <div class="note-informative">
+        <p class="disclaimer"><strong>Attenzione:</strong> Questo calcolatore fornisce una stima indicativa e non sostituisce una consulenza fiscale professionale o i calcoli ufficiali. I risultati possono variare in base a specifiche situazioni contrattuali, detrazioni personali non considerate e aliquote comunali/regionali precise.</p>
+        <p class="fonti">I calcoli si basano sulle normative fiscali vigenti per l'anno 2025 (scaglioni IRPEF, detrazioni per lavoro dipendente). Le aliquote delle addizionali regionali e comunali sono stime.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p class="contact-email">Per feedback o segnalazioni: <a href="mailto:info@stimastipendio.it">info@stimastipendio.it</a></p>
+    <p class="copyright-text">&copy; <span id="currentYear"></span> Stima Stipendio. Tutti i diritti riservati.</p>
+  </footer>
+
+  <script src="script.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
+  <script>
+  particlesJS("particles-js", {
+    "particles": {
+      "number": { "value": 45, "density": { "enable": true, "value_area": 800 } },
+      "color": { "value": ["#6c2bd9", "#00f7e5", "#00ff7f"] }, // Colori delle particelle
+      "shape": { "type": "circle" },
+      "opacity": { "value": 0.5, "random": true },
+      "size": { "value": 5, "random": true },
+      "line_linked": {
+        "enable": true,
+        "distance": 120,
+        "color": "#00fff7", // Colore delle linee di collegamento
+        "opacity": 0.4,
+        "width": 1
+      },
+      "move": { "enable": true, "speed": 1.5, "out_mode": "out" }
+    },
+    "interactivity": {
+      "events": {
+        "onhover": { "enable": true, "mode": "grab" }, // Effetto al passaggio del mouse
+        "onclick": { "enable": false } // Nessun effetto al click
+      },
+      "modes": { // Definizione delle modalità di interazione
+        "grab": {
+          "distance": 140,
+          "line_linked": { "opacity": 0.7 }
+        }
+      }
+    },
+    "retina_detect": true
+  });
+  </script>
+</body>
+</html>

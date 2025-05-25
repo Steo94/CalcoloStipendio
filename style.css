@@ -1,0 +1,358 @@
+/* Import Google Font Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* Variabili CSS per il tema chiaro (default) */
+:root {
+  --primary-color: #007bff;
+  --primary-color-darker: #0056b3;
+  --background-color: #f4f7f6; /* Questo sarà lo sfondo DIETRO le particelle */
+  --container-background: #ffffff;
+  --text-color: #333333;
+  --label-color: #555555;
+  --input-background: #ffffff;
+  --input-text-color: #333333;
+  --border-color: #dddddd;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --font-family: 'Poppins', sans-serif;
+  --risultato-background: #f8f9fa;
+  --risultato-border-color: #e9ecef;
+  --hr-color: #dddddd;
+  --footer-text-color: #6c757d;
+  --tab-inactive-background: #e9ecef;
+  --tab-inactive-text: #495057;
+  --tab-active-background: var(--primary-color);
+  --tab-active-text: #ffffff;
+
+  /* Variabili per l'header del sito */
+  --site-header-background: var(--container-background);
+  --site-header-text-color: var(--primary-color);
+  --site-header-shadow-color: var(--shadow-color);
+}
+
+/* Variabili CSS per il tema scuro */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary-color: #0084ff;
+    --primary-color-darker: #006adc;
+    --background-color: #121212; /* Sfondo DIETRO le particelle in tema scuro */
+    --container-background: #1e1e1e;
+    --text-color: #e0e0e0;
+    --label-color: #bbbbbb;
+    --input-background: #2c2c2c;
+    --input-text-color: #e0e0e0;
+    --border-color: #444444;
+    --shadow-color: rgba(0, 0, 0, 0.4);
+    --risultato-background: #252525;
+    --risultato-border-color: #383838;
+    --hr-color: #444444;
+    --footer-text-color: #adb5bd;
+    --tab-inactive-background: #343a40;
+    --tab-inactive-text: #adb5bd;
+    --tab-active-background: var(--primary-color);
+    --tab-active-text: #ffffff;
+
+    /* Variabili header per tema scuro */
+    --site-header-background: var(--container-background);
+    --site-header-text-color: var(--primary-color);
+    --site-header-shadow-color: var(--shadow-color);
+  }
+
+  .container, .site-header, footer {
+    box-shadow: 0 8px 25px var(--site-header-shadow-color);
+  }
+
+  input[type="number"]:focus,
+  select:focus {
+    box-shadow: 0 0 0 3px rgba(0, 132, 255, 0.35);
+  }
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--background-color); /* Sfondo di fallback */
+  color: var(--text-color);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  align-items: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  position: relative; /* Necessario se #particles-js usa z-index negativo e altri elementi no */
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* Stili per Particles.js background */
+#particles-js {
+  position: fixed; /* O 'absolute' se il body è l'unico contenitore scrollabile */
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1; /* Mette le particelle dietro tutto il resto */
+  /* Se lo sfondo del body deve essere visibile attraverso le particelle,
+     il canvas di particles.js è trasparente di default.
+     Altrimenti, si può impostare un background qui se necessario.
+     background-color: var(--background-color); // Esempio se si vuole un colore specifico per l'area particles
+  */
+}
+
+
+/* Stili per l'Header del Sito Modernizzato */
+.site-header {
+  width: 100%;
+  max-width: 580px;
+  background-color: var(--site-header-background);
+  padding: 1.5rem 2rem;
+  text-align: center;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px var(--site-header-shadow-color);
+  margin-top: 2rem;
+  margin-bottom: 1.5rem;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  position: relative; /* Assicura che sia sopra le particelle */
+  z-index: 1;
+}
+
+.site-header h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--site-header-text-color);
+  margin: 0;
+  line-height: 1.2;
+  transition: color 0.3s ease;
+}
+
+/* Area principale che contiene il calcolatore */
+.main-calculator-area {
+  flex-grow: 1;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 1rem 2rem 1rem;
+  position: relative; /* Assicura che sia sopra le particelle */
+  z-index: 1;
+}
+
+.container {
+  background: var(--container-background);
+  padding: 2rem 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px var(--shadow-color);
+  width: 100%;
+  max-width: 580px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  /* position: relative; z-index: 1; // Già contenuto in .main-calculator-area */
+}
+
+/* Stili per le schede (Tabs) */
+.tabs {
+  display: flex;
+  margin-bottom: 1.5rem;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+}
+
+.tab-button {
+  flex-grow: 1;
+  padding: 0.75rem 0.5rem;
+  font-family: var(--font-family);
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-align: center;
+  border: none;
+  background-color: var(--tab-inactive-background);
+  color: var(--tab-inactive-text);
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  outline: none;
+}
+
+.tab-button:not(:last-child) {
+    border-right: 1px solid var(--border-color);
+}
+
+.tab-button.active {
+  background-color: var(--tab-active-background);
+  color: var(--tab-active-text);
+  font-weight: 600;
+}
+
+.tab-button:hover:not(.active) {
+  background-color: color-mix(in srgb, var(--tab-inactive-background) 80%, var(--text-color) 20%);
+}
+
+.tab-content {
+  display: none;
+  animation: fadeIn 0.5s;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.tab-content h2 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  transition: color 0.3s ease;
+}
+
+label {
+  display: block;
+  margin-top: 1.2rem;
+  margin-bottom: 0.6rem;
+  font-weight: 500;
+  color: var(--label-color);
+  text-align: left;
+  font-size: 0.95rem;
+  transition: color 0.3s ease;
+}
+
+input[type="number"],
+select {
+  width: 100%;
+  padding: 0.6rem 1rem;
+  background-color: var(--input-background);
+  color: var(--input-text-color);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-family: var(--font-family);
+  font-size: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+input[type="number"]:focus,
+select:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+  outline: none;
+}
+
+.tab-content button {
+  margin-top: 2rem;
+  width: 100%;
+  padding: 0.9rem 1.5rem;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: var(--font-family);
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.tab-content button:hover {
+  background-color: var(--primary-color-darker);
+  transform: translateY(-2px);
+}
+
+.tab-content button:active {
+  transform: translateY(0px);
+  background-color: var(--primary-color);
+}
+
+.risultato-sezione {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background-color: var(--risultato-background);
+  border-radius: 8px;
+  border: 1px solid var(--risultato-border-color);
+  text-align: left;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.risultato-sezione p {
+  margin: 0.6rem 0;
+  line-height: 1.6;
+  color: var(--text-color);
+  transition: color 0.3s ease;
+}
+
+.risultato-sezione p strong {
+  color: var(--primary-color);
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.risultato-sezione hr {
+  border: none;
+  border-top: 1px solid var(--hr-color);
+  margin: 1rem 0;
+  transition: border-top-color 0.3s ease;
+}
+
+.note-informative {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--hr-color);
+  font-size: 0.8rem;
+  color: var(--label-color);
+  text-align: left;
+  transition: color 0.3s ease, border-top-color 0.3s ease;
+}
+
+.note-informative p {
+  margin-bottom: 0.75rem;
+  line-height: 1.5;
+}
+
+.note-informative p:last-child {
+  margin-bottom: 0;
+}
+
+.note-informative strong {
+  color: var(--text-color);
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+footer {
+  width: 100%;
+  max-width: 580px;
+  text-align: center;
+  padding: 1.5rem 1rem;
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
+  font-size: 0.85rem;
+  color: var(--footer-text-color);
+  background-color: var(--site-header-background);
+  border-radius: 12px;
+  box-shadow: 0 6px 18px var(--site-header-shadow-color);
+  transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  position: relative; /* Assicura che sia sopra le particelle */
+  z-index: 1;
+}
+
+footer p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+footer .contact-email {
+  margin-bottom: 0.5rem;
+}
+
+footer .contact-email a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+footer .contact-email a:hover {
+  text-decoration: underline;
+}
